@@ -1730,34 +1730,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -1833,7 +1807,8 @@ __webpack_require__.r(__webpack_exports__);
     source: String
   },
   data: function data() {
-    return {
+    return _defineProperty({
+      tabs: 3,
       drawer: null,
       items: [{
         heading: 'Labels'
@@ -1849,8 +1824,20 @@ __webpack_require__.r(__webpack_exports__);
         icon: 'mdi-anchor',
         text: 'Create new label'
       }],
-      lorem: "Lorem ipsum dolor sit amet, mel at clita quando. Te sit oratio vituperatoribus, nam ad ipsum posidonium mediocritatem, explicari dissentiunt cu mea. Repudiare disputationi vim in, mollis iriure nec cu, alienum argumentum ius ad. Pri eu justo aeque torquatos."
-    };
+      valid: false,
+      lazy: false,
+      select: null
+    }, "items", ['Item 1', 'Item 2', 'Item 3', 'Item 4']);
+  },
+  methods: {
+    validate: function validate() {
+      if (this.$refs.form.validate()) {
+        this.snackbar = true;
+      }
+    },
+    reset: function reset() {
+      this.$refs.form.reset();
+    }
   }
 });
 
@@ -37843,115 +37830,121 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-app",
-    { attrs: { id: "keep" } },
+    "v-layout",
+    { attrs: { row: "" } },
     [
+      _c("v-flex", {
+        staticClass: "online-users adheight",
+        attrs: { xs4: "" }
+      }),
+      _vm._v(" "),
       _c(
-        "v-content",
-        { staticClass: "grey lighten-4" },
+        "v-flex",
+        {
+          staticClass: "messages mb-5 adheight",
+          attrs: { id: "privateMessageBox", xs8: "" }
+        },
         [
           _c(
-            "v-app-bar",
-            { attrs: { app: "", "clipped-left": "" } },
+            "v-tabs",
+            { attrs: { grow: true } },
             [
-              _c(
-                "v-toolbar-title",
-                { staticClass: "title ml-3 mr-5", attrs: { href: "/" } },
-                [_vm._v("Imagemap")]
-              ),
+              _c("v-tabs-slider"),
               _vm._v(" "),
-              _c("v-spacer"),
+              _c("v-tab", { attrs: { href: "#tab-1" } }, [_vm._v("Nature")]),
               _vm._v(" "),
-              [
-                _c(
-                  "v-btn",
-                  { attrs: { icon: "" } },
-                  [_c("v-icon", [_vm._v("mdi-export-variant")])],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "v-btn",
-                  { attrs: { icon: "" } },
-                  [_c("v-icon", [_vm._v("mdi-delete-circle")])],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "v-btn",
-                  { attrs: { icon: "" } },
-                  [_c("v-icon", [_vm._v("mdi-plus-circle")])],
+              _c("v-tab", { attrs: { href: "#tab-2" } }, [_vm._v("Cars")]),
+              _vm._v(" "),
+              _c("v-tab", { attrs: { href: "#tab-3" } }, [_vm._v("People")]),
+              _vm._v(" "),
+              _vm._l(_vm.tabs, function(i) {
+                return _c(
+                  "v-tab-item",
+                  { key: i, attrs: { value: "tab-" + i } },
+                  [
+                    _c(
+                      "v-container",
+                      { attrs: { fluid: "", "grid-list-sm": "" } },
+                      [
+                        _c(
+                          "v-layout",
+                          { attrs: { wrap: "" } },
+                          _vm._l(6, function(a) {
+                            return _c(
+                              "v-flex",
+                              { key: a, attrs: { xs12: "", md4: "" } },
+                              [
+                                _c(
+                                  "v-card",
+                                  [
+                                    _c(
+                                      "v-img",
+                                      {
+                                        attrs: {
+                                          src:
+                                            "https://picsum.photos/500/300?image=" +
+                                            (a * i * 5 + 10),
+                                          "lazy-src":
+                                            "https://picsum.photos/10/6?image=" +
+                                            (a * i * 5 + 10),
+                                          "aspect-ratio": "1",
+                                          height: "200px"
+                                        }
+                                      },
+                                      [
+                                        _c("v-card-title", {
+                                          staticClass: "fill-height align-end"
+                                        })
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-card-actions",
+                                      [
+                                        _c("v-spacer"),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-btn",
+                                          { attrs: { icon: "" } },
+                                          [_c("v-icon", [_vm._v("favorite")])],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-btn",
+                                          { attrs: { icon: "" } },
+                                          [_c("v-icon", [_vm._v("bookmark")])],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-btn",
+                                          { attrs: { icon: "" } },
+                                          [_c("v-icon", [_vm._v("share")])],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          }),
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
                   1
                 )
-              ]
+              })
             ],
             2
-          ),
-          _vm._v(" "),
-          _c(
-            "v-container",
-            {
-              staticClass: "grey lighten-4",
-              attrs: {
-                fluid: "",
-                "fill-height": "",
-                "grid-list-md": "",
-                "text-center": ""
-              }
-            },
-            [
-              _c(
-                "v-layout",
-                {
-                  attrs: { wrap: "", "justify-center": "", "align-center": "" }
-                },
-                [
-                  _c(
-                    "v-flex",
-                    { staticClass: "one", attrs: { shrink: "", xs6: "" } },
-                    [
-                      _c(
-                        "v-card",
-                        {
-                          attrs: {
-                            color: "blue-grey",
-                            dark: "",
-                            tile: "",
-                            flat: ""
-                          }
-                        },
-                        [_c("v-card-text", [_vm._v(_vm._s(_vm.lorem))])],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    { staticClass: "two", attrs: { shrink: "", xs6: "" } },
-                    [
-                      _c(
-                        "v-card",
-                        {
-                          attrs: {
-                            color: "brown",
-                            dark: "",
-                            tile: "",
-                            flat: ""
-                          }
-                        },
-                        [_c("v-card-text", [_vm._v(_vm._s(_vm.lorem))])],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
           )
         ],
         1

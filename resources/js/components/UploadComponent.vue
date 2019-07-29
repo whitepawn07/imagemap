@@ -1,99 +1,71 @@
 <template>
-<v-app id="keep">
-    <v-content class="grey lighten-4">
-    <v-app-bar
-      app
-      clipped-left
-    >
-        <!-- <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon> -->
-        <v-toolbar-title class="title ml-3 mr-5" href="/">Imagemap</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <template >
-            <v-btn icon>
-                <v-icon>mdi-export-variant</v-icon>
-            </v-btn>
-            <v-btn icon>
-                <v-icon>mdi-delete-circle</v-icon>
-            </v-btn>
-            <v-btn icon>
-                <v-icon>mdi-plus-circle</v-icon>
-            </v-btn>
-        </template>
+ <v-layout row>
+    <v-flex class="online-users adheight" xs4>
       
-    </v-app-bar>
 
-    <!-- <v-navigation-drawer
-      v-model="drawer"
-      app
-      clipped
-      color="grey lighten-4"
-    >
-      <v-list
-        dense
-        class="grey lighten-4"
-      >
-        <template v-for="(item, i) in items">
-          <v-layout
-            v-if="item.heading"
-            :key="i"
-            align-center
-          >
-            <v-flex xs6>
-              <v-subheader v-if="item.heading">
-                {{ item.heading }}
-              </v-subheader>
-            </v-flex>
-          </v-layout>
-          <v-divider
-            v-else-if="item.divider"
-            :key="i"
-            dark
-            class="my-4"
-          ></v-divider>
-          <v-list-item
-            v-else
-            :key="i"
-            
-          >
-            <v-list-item-action>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title class="grey--text">
-                {{ item.text }}
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </template>
-      </v-list>
-    </v-navigation-drawer> -->
-
+    </v-flex>
     
-      <v-container
-        fluid
-        fill-height
-        class="grey lighten-4"
-        grid-list-md text-center
-      >
-        <v-layout
-            wrap
-          justify-center
-          align-center
-        >
-          <v-flex shrink xs6 class="one">
-            <v-card color="blue-grey" dark tile flat>
-              <v-card-text>{{ lorem }}</v-card-text>
-            </v-card>
-          </v-flex>
-          <v-flex shrink xs6 class="two">
-            <v-card color="brown" dark tile flat>
-              <v-card-text>{{ lorem }}</v-card-text>
-            </v-card>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-content>
-  </v-app>
+    <v-flex id="privateMessageBox" class="messages mb-5 adheight" xs8>
+        <v-tabs :grow=true  >
+                <v-tabs-slider></v-tabs-slider>
+                <v-tab href="#tab-1">Nature</v-tab>
+                <v-tab href="#tab-2">Cars</v-tab>
+                <v-tab href="#tab-3">People</v-tab>
+                <v-tab-item v-for="i in tabs"
+                    :key="i"
+                    :value="'tab-' + i">
+                    <v-container
+                    fluid
+                    grid-list-sm
+                    >
+                    <v-layout wrap>
+                        <v-flex
+                        v-for="a in 6"
+                        :key="a"
+                        xs12
+                        md4
+                        >
+                        <!-- <v-img
+                            :src="`https://picsum.photos/500/300?image=${a * i * 5 + 10}`"
+                            :lazy-src="`https://picsum.photos/10/6?image=${a * i * 5 + 10}`"
+                            aspect-ratio="1"
+                        ></v-img> -->
+                        <v-card>
+                        <v-img
+                        :src="`https://picsum.photos/500/300?image=${a * i * 5 + 10}`"
+                        :lazy-src="`https://picsum.photos/10/6?image=${a * i * 5 + 10}`"
+                        aspect-ratio="1"
+                        height="200px"
+                        >
+                        <v-card-title
+                            class="fill-height align-end"
+                            
+                        ></v-card-title>
+                        </v-img>
+
+                        <v-card-actions>
+                        <v-spacer></v-spacer>
+
+                        <v-btn icon>
+                            <v-icon>favorite</v-icon>
+                        </v-btn>
+
+                        <v-btn icon>
+                            <v-icon>bookmark</v-icon>
+                        </v-btn>
+
+                        <v-btn icon>
+                            <v-icon>share</v-icon>
+                        </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                        </v-flex>
+                    </v-layout>
+                    </v-container>
+                </v-tab-item>
+                </v-tabs>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
@@ -102,18 +74,35 @@ export default {
       source: String,
     },
     data: () => ({
-      drawer: null,
-      items: [
-        { heading: 'Labels' },
-        { divider: true },
-        { icon: 'mdi-anchor', text: 'Notes' },
-        { icon: 'mdi-anchor', text: 'Reminders' },
-        { icon: 'mdi-anchor', text: 'Create new label' },
-        
-        
-      ],
-       lorem: `Lorem ipsum dolor sit amet, mel at clita quando. Te sit oratio vituperatoribus, nam ad ipsum posidonium mediocritatem, explicari dissentiunt cu mea. Repudiare disputationi vim in, mollis iriure nec cu, alienum argumentum ius ad. Pri eu justo aeque torquatos.`,
+        tabs: 3,
+        drawer: null,
+        items: [
+            { heading: 'Labels' },
+            { divider: true },
+            { icon: 'mdi-anchor', text: 'Notes' },
+            { icon: 'mdi-anchor', text: 'Reminders' },
+            { icon: 'mdi-anchor', text: 'Create new label' },
+        ],
+        valid:false,
+        lazy: false,
+        select: null,
+        items: [
+            'Item 1',
+            'Item 2',
+            'Item 3',
+            'Item 4',
+        ],
     }),
+    methods:{
+        validate () {
+        if (this.$refs.form.validate()) {
+          this.snackbar = true
+        }
+      },
+      reset () {
+        this.$refs.form.reset()
+      },
+    }
 }
 </script>
 <style>

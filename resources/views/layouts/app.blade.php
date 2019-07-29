@@ -23,6 +23,46 @@
 </head>
 <body>
     <div id="app">
+    <v-app id="keep">
+    <v-content fluid>
+        <v-app-bar app >
+            
+            <v-toolbar >
+                <v-toolbar-title class="title ml-3 mr-5" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</v-toolbar-title>
+                <v-spacer></v-spacer>
+
+                <v-toolbar-items>
+                    @guest
+                    <v-btn text href="{{ route('login') }}">{{ __('Login') }}</v-btn>
+                    <v-btn text href="{{ route('register') }}">{{ __('Register') }}</v-btn>
+                    @else
+                    <v-btn text> {{ Auth::user()->name }}</v-btn>
+                    <v-btn text onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();"> {{ __('Logout') }}</v-btn>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                    @endguest
+                </v-toolbar-items>
+
+                <!-- <template v-if="$vuetify.breakpoint.smAndUp">
+                    <v-btn icon>
+                    <v-icon>mdi-home</v-icon>
+                    </v-btn>
+                    <v-btn icon>
+                    <v-icon>mdi-thumb_up</v-icon>
+                    </v-btn>
+                    <v-btn icon>
+                    <v-icon>mdi-plus-circle</v-icon>
+                    </v-btn>
+                </template> -->
+
+               
+            </v-toolbar>
+            
+        
+        </v-app-bar>
+        
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="display:none;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -79,9 +119,11 @@
             </div>
         </nav>
 
-        <!-- <main class="py-4"> -->
+        <main class="py-4">
             @yield('content')
-        <!-- </main> -->
+        </main>
+        </v-content>
+  </v-app>
     </div>
 </body>
 </html>
