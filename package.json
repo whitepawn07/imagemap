@@ -24,6 +24,6 @@
         "tailwindcss": "^1.0.5",
         "vue": "^2.5.17",
         "vue-template-compiler": "^2.6.10",
-        "vuetify": "^2.0.0"
+        "vuetify": "^2.6.10"
     }
 }
